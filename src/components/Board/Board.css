@@ -1,0 +1,9 @@
+.board {
+    display: grid;
+    grid-template-columns: 20% 20% 20%;
+}
+
+.cell {
+    height: 10vw;
+    font-size: 8vw;
+}
