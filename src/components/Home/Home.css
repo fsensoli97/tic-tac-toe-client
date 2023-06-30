@@ -1,0 +1,58 @@
+.title {
+    text-align: center;
+    color: #8c80b1;
+    font-size: 5.5vw;
+    font-weight: bold;
+    padding: 5vh 0;
+    text-shadow: 1px 1px 1px #d0ccde;;
+}
+
+.controlsCont {
+    margin-top: 6vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 4vh;
+}
+
+.levelCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2vh;
+}
+
+.control {
+    width: 33%;
+    text-align: center;
+    background-color: #37B9F1;
+    cursor: pointer;
+    padding: 2vh 2vh;
+    color: #2058a8;
+    font-weight: bold;
+    box-shadow: 0 0 5px white;
+    border-radius: 2px;
+    transition: 0.2s;
+}
+
+.levelControl {
+    width: 100%;
+    text-align: center;
+    background-color: #6ecaf2;
+    cursor: pointer;
+    padding: 1vh 1vh;
+    color: #2058a8;
+    font-weight: bold;
+    box-shadow: 0 0 5px white;
+    border-radius: 2px;
+    transition: 0.2s;
+}
+
+.control:hover, .levelControl:hover {
+    box-shadow: 0 0 15px white;
+}
+
+a {
+    text-decoration: none;
+    color: #2058a8;
+}
