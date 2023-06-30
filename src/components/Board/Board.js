@@ -552,21 +552,29 @@ export default function Board({ playComputer, playAs, level}) {
 
     return (
         <>
-            {result ? result : isX ? "Player 1 turn" : "Player 2 turn"}
+            <div className="currentPlayer">{result ? result : isX ? "Player 1 turn" : "Player 2 turn"}</div>
 
             <div className="board">
-                <button className="cell" onClick={() => clickHandle(0)}>{board[0]}</button>
-                <button className="cell" onClick={() => clickHandle(1)}>{board[1]}</button>
-                <button className="cell" onClick={() => clickHandle(2)}>{board[2]}</button>
-                <button className="cell" onClick={() => clickHandle(3)}>{board[3]}</button>
-                <button className="cell" onClick={() => clickHandle(4)}>{board[4]}</button>
-                <button className="cell" onClick={() => clickHandle(5)}>{board[5]}</button>
-                <button className="cell" onClick={() => clickHandle(6)}>{board[6]}</button>
-                <button className="cell" onClick={() => clickHandle(7)}>{board[7]}</button>
-                <button className="cell" onClick={() => clickHandle(8)}>{board[8]}</button>
+                <div className="cellRow">
+                    <button className="cell" onClick={() => clickHandle(0)} style={board[0] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[0]}</button>
+                    <button className="cell" onClick={() => clickHandle(1)} style={board[1] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[1]}</button>
+                    <button className="cell" onClick={() => clickHandle(2)} style={board[2] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[2]}</button>
+                </div>
+                <div className="cellRow">
+                    <button className="cell" onClick={() => clickHandle(3)} style={board[3] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[3]}</button>
+                    <button className="cell" onClick={() => clickHandle(4)} style={board[4] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[4]}</button>
+                    <button className="cell" onClick={() => clickHandle(5)} style={board[5] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[5]}</button>
+                </div>
+                <div className="cellRow">
+                    <button className="cell" onClick={() => clickHandle(6)} style={board[6] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[6]}</button>
+                    <button className="cell" onClick={() => clickHandle(7)} style={board[7] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[7]}</button>
+                    <button className="cell" onClick={() => clickHandle(8)} style={board[8] === "X" ? {color: "red"} : {color: "#4c74ad"}}>{board[8]}</button>
+                </div>
+                
+                
             </div>
 
-            {result ? <button  onClick={playAgain}>Play again?</button> : <></>}
+            {result ? <div className="buttonCont"><button className="playAgain" onClick={playAgain}>Play again?</button></div> : <></>}
         </>
     );
 }

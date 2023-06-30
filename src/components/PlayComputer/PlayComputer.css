@@ -1,0 +1,13 @@
+.homeIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #4c74ad;
+    font-size: 6vw;
+    padding: 2.5vh 2.5vh;
+    transition: 0.2s;
+}
+
+.homeIcon:hover {
+    font-size: 7vw;
+}

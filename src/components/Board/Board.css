@@ -1,9 +1,63 @@
 .board {
-    display: grid;
-    grid-template-columns: 20% 20% 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cellRow {
+    display: flex;
 }
 
 .cell {
-    height: 10vw;
-    font-size: 8vw;
+    height: 17vh;
+    width: 17vh;
+    font-size: 12vw;
+    font-weight: bold;
+    color: #4c74ad;
+    text-shadow: 1px 1px 2px #d0ccde;
+    background-color: #535656;
+    border-color: rgb(129, 120, 120);
+    box-shadow: 1px 1px 2px #d0ccde;
+    transition: 0.2s;
+}
+
+.currentPlayer {
+    margin-top: 5vh;
+    text-align: center;
+    color: #8c80b1;
+    font-size: 6.5vw;
+    font-weight: bold;
+    padding: 4vh 0;
+    text-shadow: 1px 1px 1px #d0ccde;
+}
+
+.cell:hover {
+    background-color: #636a6a;
+    box-shadow: 1px 1px 5px #d0ccde;
+}
+
+.cell:active {
+    background-color: #7e8686;
+    box-shadow: 1px 1px 15px #d0ccde;
+}
+
+.buttonCont {
+    display: flex;
+    justify-content: center;
+}
+
+.playAgain {
+    color: #8c80b1;
+    font-size: 5vw;
+    font-weight: bold;
+    padding: 5vh 0;
+    background: none;
+    border: none;
+    text-shadow: 1px 1px 1px #d0ccde;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.playAgain:hover {
+    margin: -2px;
 }
