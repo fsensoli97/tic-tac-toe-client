@@ -1,13 +1,49 @@
-.homeIcon {
+.homeIcon, .refreshIcon {
     position: absolute;
     top: 0;
-    left: 0;
     color: #4c74ad;
     font-size: 6vw;
     padding: 2.5vh 2.5vh;
     transition: 0.2s;
+    cursor: pointer;
 }
 
-.homeIcon:hover {
+.homeIcon {
+    left: 0;
+}
+
+.refreshIcon {
+    right: 0;
+}
+
+.homeIcon:hover, .refreshIcon:hover {
     font-size: 7vw;
+}
+
+.computerLevel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5vw;
+    text-align: center;
+    color: #8c80b1;
+    font-size: 3.5vw;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #d0ccde;
+    padding: 3vh 0;
+}
+
+.level {
+    text-align: center;
+    color: #8c80b1;
+    font-size: 3.5vw;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #ffffff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.level:hover {
+    margin-top: -2px;
+    margin-bottom: 2px;
 }

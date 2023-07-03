@@ -4,17 +4,18 @@ import PlayComputer from './components/PlayComputer/PlayComputer';
 import Board from './components/Board/Board';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import PassPlay from './components/PassPlay/PassPlay';
 
 function App() {
-  const [computerLevel, setComputerLevel] = useState("easy");
+  const [computerLevel, setComputerLevel] = useState(null);
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home setLevel={setComputerLevel}></Home>}></Route>
-          <Route path="/pass-and-play" element={<Board></Board>}></Route>
-          <Route path="/play-against-computer" element={<PlayComputer level={computerLevel}></PlayComputer>}></Route>
+          <Route path="/pass-and-play" element={<PassPlay></PassPlay>}></Route>
+          <Route path="/play-against-computer" element={<PlayComputer level={computerLevel} setLevel={setComputerLevel}></PlayComputer>}></Route>
           <Route path="/play-online" element={<></>}></Route>
         </Routes>
       </BrowserRouter>

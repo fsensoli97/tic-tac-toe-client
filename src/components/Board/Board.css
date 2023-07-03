@@ -13,12 +13,11 @@
     width: 17vh;
     font-size: 12vw;
     font-weight: bold;
-    color: #4c74ad;
     text-shadow: 1px 1px 2px #d0ccde;
     background-color: #535656;
     border-color: rgb(129, 120, 120);
     box-shadow: 1px 1px 2px #d0ccde;
-    transition: 0.2s;
+    transition: 0.15s;
 }
 
 .currentPlayer {
@@ -59,5 +58,36 @@
 }
 
 .playAgain:hover {
-    margin: -2px;
+    margin-top: -2px;
+    margin-bottom: 2px;
+}
+
+.playAs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5vw;
+    text-align: center;
+    color: #8c80b1;
+    font-size: 3.5vw;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #d0ccde;
+    padding: 3vh 0;
+}
+
+.playAsOption {
+    text-align: center;
+    color: #8c80b1;
+    font-size: 3.5vw;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #ffffff;
+    cursor: pointer;
+    transition: 0.2s;
+    background: none;
+    border: none;
+}
+
+.playAsOption:hover {
+    margin-top: -2px;
+    margin-bottom: 2px;
 }

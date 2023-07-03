@@ -16,7 +16,7 @@ export default function Home({ setLevel }) {
                 {showLevel ? <div className="levelCont">
                     <div className="levelControl"><Link to="/play-against-computer" onClick={() => setLevel("easy")}>Easy</Link></div>
                     <div className="levelControl"><Link to="/play-against-computer" onClick={() => setLevel("intermediate")}>Intermediate</Link></div>
-                    <div className="levelControl"><Link to="/play-against-computer" onClick={() => setLevel("hard")}>Hard</Link></div></div> 
+                    <div className="levelControl"><Link to="/play-against-computer" onClick={() => setLevel("hard")}>Hard</Link></div></div>
                     : <></>}
 
                 <div className="control"><Link to="/play-online">Play online</Link></div>
