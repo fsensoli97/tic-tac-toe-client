@@ -22,8 +22,15 @@ export default function Board({ playComputer, level }) {
             i = Math.floor(Math.random() * 9);
         }
 
-        if (level === "hard") {
-            if (Math.floor(Math.random() * 2 + 1) % 2 === 0) {
+        if (level === "hard" || level == "intermediate") {
+
+            if (level === "intermediate" && Math.floor(Math.random() * 4) === 0) {
+                do {
+                    i = Math.floor(Math.random() * 9);         
+                } while(board[i] !== null);
+            }
+
+            else if (Math.floor(Math.random() * 2 + 1) % 2 === 0) {
                 i = 4;
             }
             else {
@@ -91,8 +98,8 @@ export default function Board({ playComputer, level }) {
     function clickHandle(idx) {
         if (result) return;
         if (board[idx]) return;
-        if (!isX && playAs === 1) return;
-        if (isX && playAs === 2) return;
+        if (playComputer && !isX && playAs === 1) return;
+        if (playComputer && isX && playAs === 2) return;
 
         let tmp = board;
         tmp[idx] = isX ? "X" : "O";

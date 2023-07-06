@@ -1,3 +1,41 @@
+function canWin(board, player) {
+    if ((board[0] === player && board[1] === player) && board[2] === null) return 2;
+    if ((board[0] === player && board[2] === player) && board[1] === null) return 1;
+    if ((board[1] === player && board[2] === player) && board[0] === null) return 0;
+
+    if ((board[2] === player && board[3] === player) && board[4] === null) return 4;
+    if ((board[2] === player && board[4] === player) && board[3] === null) return 3;
+    if ((board[3] === player && board[4] === player) && board[2] === null) return 2;
+
+    if ((board[6] === player && board[7] === player) && board[8] === null) return 8;
+    if ((board[6] === player && board[8] === player) && board[7] === null) return 7;
+    if ((board[7] === player && board[8] === player) && board[6] === null) return 6;
+
+    /* columns */
+    if ((board[0] === player && board[3] === player) && board[6] === null) return 6;
+    if ((board[0] === player && board[6] === player) && board[3] === null) return 3;
+    if ((board[3] === player && board[6] === player) && board[0] === null) return 0;
+
+    if ((board[1] === player && board[4] === player) && board[7] === null) return 7;
+    if ((board[1] === player && board[7] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[7] === player) && board[1] === null) return 1;
+
+    if ((board[2] === player && board[5] === player) && board[8] === null) return 8;
+    if ((board[2] === player && board[8] === player) && board[5] === null) return 5;
+    if ((board[5] === player && board[8] === player) && board[2] === null) return 2;
+
+    /* cross */
+    if ((board[0] === player && board[4] === player) && board[8] === null) return 8;
+    if ((board[0] === player && board[8] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[8] === player) && board[0] === null) return 0;
+
+    if ((board[2] === player && board[4] === player) && board[6] === null) return 6;
+    if ((board[2] === player && board[6] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[6] === player) && board[2] === null) return 2;
+
+    return -1;
+}
+
 export function computerMove(board, level) {
 
     let i;
@@ -182,6 +220,7 @@ export function computerMove(board, level) {
 
             case 4: {
                 console.log("move 5");
+                if (canWin(board, "X") >= 0) return canWin(board, "X");
                 if (board[4] === "O" && board[1] === "O") i = 7;
                 else if (board[4] === "O" && board[3] === "O") i = 5;
                 else if (board[4] === "O" && board[5] === "O") i = 3;
@@ -247,6 +286,7 @@ export function computerMove(board, level) {
 
             case 5: {
                 console.log("move 6");
+                if (canWin(board, "O") >= 0) return canWin(board, "O");
                 if (board[0] === "O" && board[1] === "O" && board[2] === null) i = 2;
                 else if (board[0] === "O" && board[2] === "O" && board[1] === null) i = 1;
                 else if (board[1] === "O" && board[2] === "O" && board[0] === null) i = 0;
@@ -311,6 +351,7 @@ export function computerMove(board, level) {
 
             case 6: {
                 console.log("move 7");
+                if (canWin(board, "X") >= 0) return canWin(board, "X");
                 if (board[0] === "X" && board[1] === "X" && board[2] === null) i = 2;
                 else if (board[0] === "X" && board[2] === "X" && board[1] === null) i = 1;
                 else if (board[1] === "X" && board[2] === "X" && board[0] === null) i = 0;
@@ -366,6 +407,7 @@ export function computerMove(board, level) {
 
             case 7: {
                 console.log("move 8");
+                if (canWin(board, "O") >= 0) return canWin(board, "O");
                 if (board[0] === "O" && board[1] === "O" && board[2] === null) i = 2;
                 else if (board[0] === "O" && board[2] === "O" && board[1] === null) i = 1;
                 else if (board[1] === "O" && board[2] === "O" && board[0] === null) i = 0;
