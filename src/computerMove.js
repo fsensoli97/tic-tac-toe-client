@@ -3,9 +3,9 @@ function canWin(board, player) {
     if ((board[0] === player && board[2] === player) && board[1] === null) return 1;
     if ((board[1] === player && board[2] === player) && board[0] === null) return 0;
 
-    if ((board[2] === player && board[3] === player) && board[4] === null) return 4;
-    if ((board[2] === player && board[4] === player) && board[3] === null) return 3;
-    if ((board[3] === player && board[4] === player) && board[2] === null) return 2;
+    if ((board[3] === player && board[4] === player) && board[5] === null) return 5;
+    if ((board[3] === player && board[5] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[5] === player) && board[3] === null) return 3;
 
     if ((board[6] === player && board[7] === player) && board[8] === null) return 8;
     if ((board[6] === player && board[8] === player) && board[7] === null) return 7;
