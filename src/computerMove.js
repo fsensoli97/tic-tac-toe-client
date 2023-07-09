@@ -1,4 +1,44 @@
-function canWin(board, player) {
+function winOrStop(board, player) {
+    /* if can win */
+    /* rows */
+    if ((board[0] === player && board[1] === player) && board[2] === null) return 2;
+    if ((board[0] === player && board[2] === player) && board[1] === null) return 1;
+    if ((board[1] === player && board[2] === player) && board[0] === null) return 0;
+
+    if ((board[3] === player && board[4] === player) && board[5] === null) return 5;
+    if ((board[3] === player && board[5] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[5] === player) && board[3] === null) return 3;
+
+    if ((board[6] === player && board[7] === player) && board[8] === null) return 8;
+    if ((board[6] === player && board[8] === player) && board[7] === null) return 7;
+    if ((board[7] === player && board[8] === player) && board[6] === null) return 6;
+
+    /* columns */
+    if ((board[0] === player && board[3] === player) && board[6] === null) return 6;
+    if ((board[0] === player && board[6] === player) && board[3] === null) return 3;
+    if ((board[3] === player && board[6] === player) && board[0] === null) return 0;
+
+    if ((board[1] === player && board[4] === player) && board[7] === null) return 7;
+    if ((board[1] === player && board[7] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[7] === player) && board[1] === null) return 1;
+
+    if ((board[2] === player && board[5] === player) && board[8] === null) return 8;
+    if ((board[2] === player && board[8] === player) && board[5] === null) return 5;
+    if ((board[5] === player && board[8] === player) && board[2] === null) return 2;
+
+    /* cross */
+    if ((board[0] === player && board[4] === player) && board[8] === null) return 8;
+    if ((board[0] === player && board[8] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[8] === player) && board[0] === null) return 0;
+
+    if ((board[2] === player && board[4] === player) && board[6] === null) return 6;
+    if ((board[2] === player && board[6] === player) && board[4] === null) return 4;
+    if ((board[4] === player && board[6] === player) && board[2] === null) return 2;
+
+    /* if must block opponent */
+    /* rows */
+    player === "X" ? player = "O" : player = "X";
+
     if ((board[0] === player && board[1] === player) && board[2] === null) return 2;
     if ((board[0] === player && board[2] === player) && board[1] === null) return 1;
     if ((board[1] === player && board[2] === player) && board[0] === null) return 0;
@@ -65,414 +105,145 @@ export function computerMove(board, level) {
             case 1: {
                 console.log("move 2");
                 if (board[4] === "X") {
-                    switch(Math.floor(Math.random() * 4)) {
-                        case 0:
-                            i = 0;
-                            break;
-                        case 1:
-                            i = 2;
-                            break;
-                        case 2:
-                            i = 6;
-                            break;
-                        case 3:
-                            i = 8;
-                            break;
-                        default:
-                            break;
-                    }
+                    const aux = Math.floor(Math.random() * 4);
+                    if (aux === 0) return 0;
+                    if (aux === 1) return 2;
+                    if (aux === 2) return 6;
+                    if (aux === 3) return 8;
                 }
-                else i = 4;
+                else return 4;
                 break;
             }
 
             case 2: {
                 console.log("move 3");
-                if (board[4] === "O" && board[1] === "O") i = 7;
-                else if (board[4] === "O" && board[3] === "O") i = 5;
-                else if (board[4] === "O" && board[5] === "O") i = 3;
-                else if (board[4] === "O" && board[7] === "O") i = 1;
-                else if (board[4] === "X") {
-                    if (board[0] === "O") i = 8;
-                    else if (board[2] === "O") i = 6;
-                    else if (board[6] === "O") i = 2;
-                    else if (board[8] === "O") i = 0;
-                    else switch(Math.floor(Math.random() * 4)) {
-                        case 0:
-                            i = 0;
-                            break;
-                        case 1:
-                            i = 2;
-                            break;
-                        case 2:
-                            i = 6;
-                            break;
-                        case 3:
-                            i = 8;
-                            break;
-                        default:
-                            break;
+                if (board[4] === "X") {
+                    if (board[1] === "O" || board[3] === "O" || board[5] === "O" || board[7] === "O") {
+                        const aux = Math.floor(Math.random() * 4);
+                        if (aux === 0) return 0;
+                        if (aux === 1) return 2;
+                        if (aux === 2) return 6;
+                        if (aux === 3) return 8;
                     }
+                    
+                    if (board[0] === "O") return 8;
+                    if (board[2] === "O") return 6;
+                    if (board[6] === "O") return 2;
+                    if (board[8] === "O") return 0;
                 }
-                else {
-                    if (board[4] === "O" && board[0] === "X") i = 8;
-                    else if (board[4] === "O" && board[2] === "X") i = 6;
-                    else if (board[4] === "O" && board[6] === "X") i = 2;
-                    else if (board[4] === "O" && board[8] === "X") i = 0;
-                    else i = 4;
-                }
-                break;
+
+                if (board[0] === "X" && (board[4] === "O" || board[2] === "O" || board[6] === "O")) return 8;
+                if (board[2] === "X" && (board[4] === "O" || board[0] === "O" || board[8] === "O")) return 6;
+                if (board[6] === "X" && (board[4] === "O" || board[0] === "O" || board[8] === "O")) return 2;
+                if (board[8] === "X" && (board[4] === "O" || board[2] === "O" || board[6] === "O")) return 0;
+
+                return 4;
             }
 
             case 3: {
                 console.log("move 4");
-                if (board[0] === "X" && board[1] === "X" && board[2] === null) i = 2;
-                else if (board[0] === "X" && board[2] === "X" && board[1] === null) i = 1;
-                else if (board[1] === "X" && board[2] === "X" && board[0] === null) i = 0;
-                
-                else if (board[0] === "X" && board[3] === "X" && board[6] === null) i = 6;
-                else if (board[0] === "X" && board[6] === "X" && board[3] === null) i = 3;
-                else if (board[3] === "X" && board[6] === "X" && board[0] === null) i = 0;
+                const aux = winOrStop(board, "O");
+                if (aux >= 0) return aux;
 
-                else if (board[2] === "X" && board[5] === "X" && board[8] === null) i = 8;
-                else if (board[5] === "X" && board[8] === "X" && board[2] === null) i = 2;
-                else if (board[2] === "X" && board[8] === "X" && board[5] === null) i = 5;
+                if (board[0] === "X" && board[4] === "X" && board[8] === "O") {
+                    const aux = Math.floor(Math.random() * 2);
+                    if (aux === 0) return 2;
+                    if (aux === 1) return 6;     
+                }
 
-                else if (board[6] === "X" && board[7] === "X" && board[8] === null) i = 8;
-                else if (board[6] === "X" && board[8] === "X" && board[7] === null) i = 7;
-                else if (board[7] === "X" && board[8] === "X" && board[6] === null) i = 6;
+                if (board[2] === "X" && board[4] === "X" && board[6] === "O") {
+                    const aux = Math.floor(Math.random() * 2);
+                    if (aux === 0) return 0;
+                    if (aux === 1) return 8;     
+                }
 
-                else if (board[0] === "X" && board[4] === "X" && board[8] === null) i = 8;
-                else if (board[0] === "X" && board[8] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[8] === "X" && board[0] === null) i = 0;
+                if (board[6] === "X" && board[4] === "X" && board[2] === "O") {
+                    const aux = Math.floor(Math.random() * 2);
+                    if (aux === 0) return 0;
+                    if (aux === 1) return 8;     
+                }
 
-                else if (board[2] === "X" && board[4] === "X" && board[6] === null) i = 6;
-                else if (board[2] === "X" && board[6] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[6] === "X" && board[2] === null) i = 2;
-                else if (board[0] === "X" && board[4] === "X" && board[8] === "O") {
-                    switch(Math.floor(Math.random() * 2)) {
-                        case 0:
-                            i = 2;
-                            break;
-                        case 1:
-                            i = 6;
-                            break;
-                        default:
-                            break;
-                    }
+                if (board[8] === "X" && board[4] === "X" && board[0] === "O") {
+                    const aux = Math.floor(Math.random() * 2);
+                    if (aux === 0) return 2;
+                    if (aux === 1) return 6;     
                 }
-                else if (board[2] === "X" && board[4] === "X" && board[6] === "O") {
-                    switch(Math.floor(Math.random() * 2)) {
-                        case 0:
-                            i = 0;
-                            break;
-                        case 1:
-                            i = 8;
-                            break;
-                        default:
-                            break;
-                    }
+
+                while(true) {
+                    let aux = Math.floor(Math.random() * 4);
+                    if (aux === 0) aux = 1;
+                    if (aux === 1) aux = 3;
+                    if (aux === 2) aux = 5;
+                    if (aux === 3) aux = 7;
+
+                    if (board[aux] === null) return aux;
                 }
-                else if (board[6] === "X" && board[4] === "X" && board[2] === "O") {
-                    switch(Math.floor(Math.random() * 2)) {
-                        case 0:
-                            i = 0;
-                            break;
-                        case 1:
-                            i = 8;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else if (board[8] === "X" && board[4] === "X" && board[0] === "O") {
-                    switch(Math.floor(Math.random() * 2)) {
-                        case 0:
-                            i = 2;
-                            break;
-                        case 1:
-                            i = 6;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else do {
-                    switch(Math.floor(Math.random() * 4)) {
-                        case 0:
-                            i = 1;
-                            break;
-                        case 1:
-                            i = 3;
-                            break;
-                        case 2:
-                            i = 5;
-                            break;
-                        case 3:
-                            i = 7;
-                            break;
-                        default:
-                            break;
-                    }
-                } while(board[i] !== null)
-                break;
             }   
 
             case 4: {
                 console.log("move 5");
-                if (canWin(board, "X") >= 0) return canWin(board, "X");
-                if (board[4] === "O" && board[1] === "O") i = 7;
-                else if (board[4] === "O" && board[3] === "O") i = 5;
-                else if (board[4] === "O" && board[5] === "O") i = 3;
-                else if (board[4] === "O" && board[7] === "O") i = 1;
-                else if (board[0] === "X" && board[1] === "X" && board[2] === null) i = 2;
-                else if (board[1] === "X" && board[2] === "X" && board[0] === null) i = 0;
-                else if (board[0] === "X" && board[3] === "X" && board[6] === null) i = 6;
-                else if (board[3] === "X" && board[6] === "X" && board[0] === null) i = 0;
-                else if (board[2] === "X" && board[5] === "X" && board[8] === null) i = 8;
-                else if (board[5] === "X" && board[8] === "X" && board[2] === null) i = 2;
-                else if (board[6] === "X" && board[7] === "X" && board[8] === null) i = 8;
-                else if (board[7] === "X" && board[8] === "X" && board[6] === null) i = 6;
-                else if (board[0] === "X" && board[4] === "X" && board[8] === null) i = 8;
-                else if (board[4] === "X" && board[8] === "X" && board[0] === null) i = 0;
-                else if (board[2] === "X" && board[4] === "X" && board[6] === null) i = 6;
-                else if (board[4] === "X" && board[6] === "X" && board[2] === null) i = 2;
-                else if (board[0] === "O" && board[1] === "O" && board[2] === null) i = 2;
-                else if (board[1] === "O" && board[2] === "O" && board[0] === null) i = 0;
-                else if (board[0] === "O" && board[3] === "O" && board[6] === null) i = 6;
-                else if (board[3] === "O" && board[6] === "O" && board[0] === null) i = 0;
-                else if (board[2] === "O" && board[5] === "O" && board[8] === null) i = 8;
-                else if (board[5] === "O" && board[8] === "O" && board[2] === null) i = 2;
-                else if (board[6] === "O" && board[7] === "O" && board[8] === null) i = 8;
-                else if (board[7] === "O" && board[8] === "O" && board[6] === null) i = 6;
-                else if (board[0] === "O" && board[4] === "O" && board[8] === null) i = 8;
-                else if (board[4] === "O" && board[8] === "O" && board[0] === null) i = 0;
-                else if (board[2] === "O" && board[4] === "O" && board[6] === null) i = 6;
-                else if (board[4] === "O" && board[6] === "O" && board[2] === null) i = 2;
-                else if (board[0] === "X" && board[1] === "O" && board[3] === null) i = 3;
-                else if (board[0] === "X" && board[3] === "O" && board[1] === null) i = 1;
-                else if (board[2] === "X" && board[1] === "O" && board[5] === null) i = 5;
-                else if (board[2] === "X" && board[5] === "O" && board[1] === null) i = 1;
-                else if (board[6] === "X" && board[3] === "O" && board[7] === null) i = 7;
-                else if (board[6] === "X" && board[7] === "O" && board[3] === null) i = 3;
-                else if (board[8] === "X" && board[7] === "O" && board[5] === null) i = 5;
-                else if (board[8] === "X" && board[5] === "O" && board[7] === null) i = 7;
-                else if (board[0] === "O" && board[1] === "O" && board[2] === null) i = 2;
-                else if (board[0] === "O" && board[2] === "O" && board[1] === null) i = 1;
-                else if (board[1] === "O" && board[2] === "O" && board[0] === null) i = 0;
-                
-                else if (board[0] === "O" && board[3] === "O" && board[6] === null) i = 6;
-                else if (board[0] === "O" && board[6] === "O" && board[3] === null) i = 3;
-                else if (board[3] === "O" && board[6] === "O" && board[0] === null) i = 0;
+                const aux = winOrStop(board, "X");
+                if (aux >= 0) return aux;
 
-                else if (board[2] === "O" && board[5] === "O" && board[8] === null) i = 8;
-                else if (board[5] === "O" && board[8] === "O" && board[2] === null) i = 2;
-                else if (board[2] === "O" && board[8] === "O" && board[5] === null) i = 5;
+                if (board[4] === "X") {
+                    if (board[0] === "X") {
+                        if (board[1] === null && board[2] === null) return 2;
+                        if (board[3] === null && board[6] === null) return 6;
+                    }
+                    if (board[2] === "X") {
+                        if (board[0] === null && board[1] === null) return 0;
+                        if (board[5] === null && board[8] === null) return 8;
+                    }
+                    if (board[6] === "X") {
+                        if (board[0] === null && board[3] === null) return 0;
+                        if (board[7] === null && board[8] === null) return 8;
+                    }
+                    if (board[8] === "X") {
+                        if (board[2] === null && board[5] === null) return 2;
+                        if (board[6] === null && board[7] === null) return 6;
+                    }
+                }
 
-                else if (board[6] === "O" && board[7] === "O" && board[8] === null) i = 8;
-                else if (board[6] === "O" && board[8] === "O" && board[7] === null) i = 7;
-                else if (board[7] === "O" && board[8] === "O" && board[6] === null) i = 6;
-
-                else if (board[0] === "O" && board[4] === "O" && board[8] === null) i = 8;
-                else if (board[0] === "O" && board[8] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[8] === "O" && board[0] === null) i = 0;
-
-                else if (board[2] === "O" && board[4] === "O" && board[6] === null) i = 6;
-                else if (board[2] === "O" && board[6] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[6] === "O" && board[2] === null) i = 2;
-                else (console.log("incomplete algorithm"));
+                console.log("incomplete algorithm");
                 break;
             }
 
             case 5: {
                 console.log("move 6");
-                if (canWin(board, "O") >= 0) return canWin(board, "O");
-                if (board[0] === "O" && board[1] === "O" && board[2] === null) i = 2;
-                else if (board[0] === "O" && board[2] === "O" && board[1] === null) i = 1;
-                else if (board[1] === "O" && board[2] === "O" && board[0] === null) i = 0;
+                const aux = winOrStop(board, "O");
+                if (aux >= 0) return aux;
                 
-                else if (board[0] === "O" && board[3] === "O" && board[6] === null) i = 6;
-                else if (board[0] === "O" && board[6] === "O" && board[3] === null) i = 3;
-                else if (board[3] === "O" && board[6] === "O" && board[0] === null) i = 0;
-
-                else if (board[2] === "O" && board[5] === "O" && board[8] === null) i = 8;
-                else if (board[5] === "O" && board[8] === "O" && board[2] === null) i = 2;
-                else if (board[2] === "O" && board[8] === "O" && board[5] === null) i = 5;
-
-                else if (board[6] === "O" && board[7] === "O" && board[8] === null) i = 8;
-                else if (board[6] === "O" && board[8] === "O" && board[7] === null) i = 7;
-                else if (board[7] === "O" && board[8] === "O" && board[6] === null) i = 6;
-
-                else if (board[0] === "O" && board[4] === "O" && board[8] === null) i = 8;
-                else if (board[0] === "O" && board[8] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[8] === "O" && board[0] === null) i = 0;
-
-                else if (board[2] === "O" && board[4] === "O" && board[6] === null) i = 6;
-                else if (board[2] === "O" && board[6] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[6] === "O" && board[2] === null) i = 2;
-                
-                else if (board[0] === "X" && board[1] === "X" && board[2] === null) i = 2;
-                else if (board[0] === "X" && board[2] === "X" && board[1] === null) i = 1;
-                else if (board[1] === "X" && board[2] === "X" && board[0] === null) i = 0;
-                
-                else if (board[0] === "X" && board[3] === "X" && board[6] === null) i = 6;
-                else if (board[0] === "X" && board[6] === "X" && board[3] === null) i = 3;
-                else if (board[3] === "X" && board[6] === "X" && board[0] === null) i = 0;
-
-                else if (board[1] === "X" && board[4] === "X" && board[7] === null) i = 7;
-                else if (board[1] === "X" && board[7] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[7] === "X" && board[1] === null) i = 1;
-
-                else if (board[3] === "X" && board[4] === "X" && board[5] === null) i = 5;
-                else if (board[3] === "X" && board[5] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[5] === "X" && board[3] === null) i = 3;
-
-                else if (board[2] === "X" && board[5] === "X" && board[8] === null) i = 8;
-                else if (board[5] === "X" && board[8] === "X" && board[2] === null) i = 2;
-                else if (board[2] === "X" && board[8] === "X" && board[5] === null) i = 5;
-
-                else if (board[6] === "X" && board[7] === "X" && board[8] === null) i = 8;
-                else if (board[6] === "X" && board[8] === "X" && board[7] === null) i = 7;
-                else if (board[7] === "X" && board[8] === "X" && board[6] === null) i = 6;
-
-                else if (board[0] === "X" && board[4] === "X" && board[8] === null) i = 8;
-                else if (board[0] === "X" && board[8] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[8] === "X" && board[0] === null) i = 0;
-
-                else if (board[2] === "X" && board[4] === "X" && board[6] === null) i = 6;
-                else if (board[2] === "X" && board[6] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[6] === "X" && board[2] === null) i = 2;
-                
-                else do {
-                    i = Math.floor(Math.random() * 9);         
-                } while(board[i] !== null);
-                break;
+                while(true) {
+                    let i = Math.floor(Math.random() * 9);   
+                    if (board[i] === null) return i;      
+                }
             }
 
             case 6: {
                 console.log("move 7");
-                if (canWin(board, "X") >= 0) return canWin(board, "X");
-                if (board[0] === "X" && board[1] === "X" && board[2] === null) i = 2;
-                else if (board[0] === "X" && board[2] === "X" && board[1] === null) i = 1;
-                else if (board[1] === "X" && board[2] === "X" && board[0] === null) i = 0;
+                const aux = winOrStop(board, "X");
+                if (aux >= 0) return aux;
                 
-                else if (board[0] === "X" && board[3] === "X" && board[6] === null) i = 6;
-                else if (board[0] === "X" && board[6] === "X" && board[3] === null) i = 3;
-                else if (board[3] === "X" && board[6] === "X" && board[0] === null) i = 0;
-
-                else if (board[2] === "X" && board[5] === "X" && board[8] === null) i = 8;
-                else if (board[5] === "X" && board[8] === "X" && board[2] === null) i = 2;
-                else if (board[2] === "X" && board[8] === "X" && board[5] === null) i = 5;
-
-                else if (board[6] === "X" && board[7] === "X" && board[8] === null) i = 8;
-                else if (board[6] === "X" && board[8] === "X" && board[7] === null) i = 7;
-                else if (board[7] === "X" && board[8] === "X" && board[6] === null) i = 6;
-
-                else if (board[0] === "X" && board[4] === "X" && board[8] === null) i = 8;
-                else if (board[0] === "X" && board[8] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[8] === "X" && board[0] === null) i = 0;
-
-                else if (board[2] === "X" && board[4] === "X" && board[6] === null) i = 6;
-                else if (board[2] === "X" && board[6] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[6] === "X" && board[2] === null) i = 2;
-                
-                else if (board[0] === "O" && board[1] === "O" && board[2] === null) i = 2;
-                else if (board[0] === "O" && board[2] === "O" && board[1] === null) i = 1;
-                else if (board[1] === "O" && board[2] === "O" && board[0] === null) i = 0;
-                
-                else if (board[0] === "O" && board[3] === "O" && board[6] === null) i = 6;
-                else if (board[0] === "O" && board[6] === "O" && board[3] === null) i = 3;
-                else if (board[3] === "O" && board[6] === "O" && board[0] === null) i = 0;
-
-                else if (board[2] === "O" && board[5] === "O" && board[8] === null) i = 8;
-                else if (board[5] === "O" && board[8] === "O" && board[2] === null) i = 2;
-                else if (board[2] === "O" && board[8] === "O" && board[5] === null) i = 5;
-
-                else if (board[6] === "O" && board[7] === "O" && board[8] === null) i = 8;
-                else if (board[6] === "O" && board[8] === "O" && board[7] === null) i = 7;
-                else if (board[7] === "O" && board[8] === "O" && board[6] === null) i = 6;
-
-                else if (board[0] === "O" && board[4] === "O" && board[8] === null) i = 8;
-                else if (board[0] === "O" && board[8] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[8] === "O" && board[0] === null) i = 0;
-
-                else if (board[2] === "O" && board[4] === "O" && board[6] === null) i = 6;
-                else if (board[2] === "O" && board[6] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[6] === "O" && board[2] === null) i = 2;
-                else do {
-                    i = Math.floor(Math.random() * 9);         
-                } while(board[i] !== null);
-                break;
+                while(true) {
+                    let i = Math.floor(Math.random() * 9);   
+                    if (board[i] === null) return i;      
+                }
             }
 
             case 7: {
                 console.log("move 8");
-                if (canWin(board, "O") >= 0) return canWin(board, "O");
-                if (board[0] === "O" && board[1] === "O" && board[2] === null) i = 2;
-                else if (board[0] === "O" && board[2] === "O" && board[1] === null) i = 1;
-                else if (board[1] === "O" && board[2] === "O" && board[0] === null) i = 0;
+                const aux = winOrStop(board, "O");
+                if (aux >= 0) return aux;
                 
-                else if (board[0] === "O" && board[3] === "O" && board[6] === null) i = 6;
-                else if (board[0] === "O" && board[6] === "O" && board[3] === null) i = 3;
-                else if (board[3] === "O" && board[6] === "O" && board[0] === null) i = 0;
-
-                else if (board[2] === "O" && board[5] === "O" && board[8] === null) i = 8;
-                else if (board[5] === "O" && board[8] === "O" && board[2] === null) i = 2;
-                else if (board[2] === "O" && board[8] === "O" && board[5] === null) i = 5;
-
-                else if (board[6] === "O" && board[7] === "O" && board[8] === null) i = 8;
-                else if (board[6] === "O" && board[8] === "O" && board[7] === null) i = 7;
-                else if (board[7] === "O" && board[8] === "O" && board[6] === null) i = 6;
-
-                else if (board[0] === "O" && board[4] === "O" && board[8] === null) i = 8;
-                else if (board[0] === "O" && board[8] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[8] === "O" && board[0] === null) i = 0;
-
-                else if (board[2] === "O" && board[4] === "O" && board[6] === null) i = 6;
-                else if (board[2] === "O" && board[6] === "O" && board[4] === null) i = 4;
-                else if (board[4] === "O" && board[6] === "O" && board[2] === null) i = 2;
-                
-                else if (board[0] === "X" && board[1] === "X" && board[2] === null) i = 2;
-                else if (board[0] === "X" && board[2] === "X" && board[1] === null) i = 1;
-                else if (board[1] === "X" && board[2] === "X" && board[0] === null) i = 0;
-                
-                else if (board[0] === "X" && board[3] === "X" && board[6] === null) i = 6;
-                else if (board[0] === "X" && board[6] === "X" && board[3] === null) i = 3;
-                else if (board[3] === "X" && board[6] === "X" && board[0] === null) i = 0;
-
-                else if (board[1] === "X" && board[4] === "X" && board[7] === null) i = 7;
-                else if (board[1] === "X" && board[7] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[7] === "X" && board[1] === null) i = 1;
-
-                else if (board[3] === "X" && board[4] === "X" && board[5] === null) i = 5;
-                else if (board[3] === "X" && board[5] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[5] === "X" && board[3] === null) i = 3;
-
-                else if (board[2] === "X" && board[5] === "X" && board[8] === null) i = 8;
-                else if (board[5] === "X" && board[8] === "X" && board[2] === null) i = 2;
-                else if (board[2] === "X" && board[8] === "X" && board[5] === null) i = 5;
-
-                else if (board[6] === "X" && board[7] === "X" && board[8] === null) i = 8;
-                else if (board[6] === "X" && board[8] === "X" && board[7] === null) i = 7;
-                else if (board[7] === "X" && board[8] === "X" && board[6] === null) i = 6;
-
-                else if (board[0] === "X" && board[4] === "X" && board[8] === null) i = 8;
-                else if (board[0] === "X" && board[8] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[8] === "X" && board[0] === null) i = 0;
-
-                else if (board[2] === "X" && board[4] === "X" && board[6] === null) i = 6;
-                else if (board[2] === "X" && board[6] === "X" && board[4] === null) i = 4;
-                else if (board[4] === "X" && board[6] === "X" && board[2] === null) i = 2;
-                
-                else do {
-                    i = Math.floor(Math.random() * 9);         
-                } while(board[i] !== null);
-                break;
+                while(true) {
+                    let i = Math.floor(Math.random() * 9);   
+                    if (board[i] === null) return i;      
+                }
             }
 
             case 8: {
                 for (let j = 0; j < 9; j++) {
-                    if (board[j] === null) i = j;
+                    if (board[j] === null) return j;
                 }
                 break;
             }
